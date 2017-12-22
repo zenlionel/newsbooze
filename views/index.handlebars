@@ -1,0 +1,74 @@
+{{#each articles}}
+<ul>
+    <li>
+        <div>
+            <b>{{updated}}</b>
+            <div>
+                <b>{{title}}</b>
+            </div>
+        </div>
+        <div>
+            <p>
+                {{summary}}
+                <a href="{{link}}" target="_new">Check it out</a>
+            </p>
+        </div>
+    </li>
+    <li>
+        <div>
+            <div>
+
+                <form id="form-add-{{_id}}" action="add/comments/{{_id}}" method="post">
+                    <div class="row">
+                        <div class="input-field col s2"></div>
+                        <div class="input-field col s8">
+                            <input id="author_name" name="name" type="text" class="validate">
+                            <label for="author_name">Your Name:</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s2"></div>
+                        <div class="input-field col s8">
+                            <textarea id="comments_box" name="comments" class="textarea"></textarea>
+                            <label for="comments_box">Your comments</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s2"></div>
+                        <div class="input-field col s8">
+                            <center>
+                                <input class="btn add-comments-button" data-id="{{_id}}" type="submit" value="Submit">
+                            </center>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </li>
+    <li>
+        <div>View Comments</div>
+        <div>
+
+            {{#if comments}}
+            <ul class="collection">
+                {{#each comments}}
+                <li class="collection-item">
+                    <b>{{author}}</b>
+                    <span class="badge">
+                        <form id="form-delete-{{_id}}" action="remove/comments/{{_id}}" method="post">
+                            <input class="btn-small delete-comments-button" data-id="{{_id}}" type="submit" value="Delete">
+                        </form>
+                    </span>
+
+                    {{content}}
+                </li>
+                {{/each}}
+            </ul>
+            {{else}}
+            <p>No Comments to Display</p>
+            {{/if}}
+        </div>
+    </li>
+</ul>
+{{/each}}
